@@ -10,11 +10,23 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://hd-notes-app.vercel.app',
+    'https://hd-notes-app-git-main.vercel.app',
+    'https://hd-notes-app-*.vercel.app'
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/notes', noteRoutes);
+
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/hd-notes')
   .then(() => console.log('Connected to MongoDB'))

@@ -9,7 +9,14 @@
     "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
     "test": "cd frontend && npm test"
   },
-  "keywords": ["react", "typescript", "nodejs", "mongodb", "notes", "authentication"],
+  "keywords": [
+    "react",
+    "typescript",
+    "nodejs",
+    "mongodb",
+    "notes",
+    "authentication"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
