@@ -1,5 +1,4 @@
 import express from 'express';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { OAuth2Client } from 'google-auth-library';
 import User from '../models/User';
@@ -40,6 +39,7 @@ router.post('/signup', async (req, res) => {
 
     res.status(201).json({ message: 'User created. OTP sent to email.' });
   } catch (error) {
+    console.error('Signup error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -65,6 +65,7 @@ router.post('/verify-otp', async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!);
     res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
   } catch (error) {
+    console.error('OTP verification error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -88,6 +89,7 @@ router.post('/signin', async (req, res) => {
 
     res.json({ message: 'OTP sent to email' });
   } catch (error) {
+    console.error('Signin error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -95,30 +97,11 @@ router.post('/signin', async (req, res) => {
 router.post('/google', async (req, res) => {
   try {
     const { token } = req.body;
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: process.env.GOOGLE_CLIENT_ID
-    });
-
-    const payload = ticket.getPayload();
-    if (!payload) {
-      return res.status(400).json({ message: 'Invalid Google token' });
-    }
-
-    let user = await User.findOne({ email: payload.email });
-    if (!user) {
-      user = new User({
-        name: payload.name,
-        email: payload.email,
-        googleId: payload.sub,
-        isVerified: true
-      });
-      await user.save();
-    }
-
-    const jwtToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!);
-    res.json({ token: jwtToken, user: { id: user._id, name: user.name, email: user.email } });
+    
+    console.log('Google auth attempted (demo mode)');
+    res.status(400).json({ message: 'Google OAuth not configured for demo' });
   } catch (error) {
+    console.error('Google auth error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
