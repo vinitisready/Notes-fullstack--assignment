@@ -1,4 +1,4 @@
-# Multi-stage build for production deployment
+# Multi-stage build for production deployment - Updated 2024
 FROM node:18-alpine AS backend-build
 WORKDIR /app/backend
 COPY backend/package*.json ./
