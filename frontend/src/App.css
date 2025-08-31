@@ -29,7 +29,7 @@ body {
 
 .auth-right {
   flex: 1;
-  background: url('./blue-wave-bg.jpg') center/cover no-repeat;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 25%, #1e40af 50%, #3b82f6 75%, #60a5fa 100%);
   display: none;
 }
 
