@@ -2,9 +2,9 @@
 FROM node:18-alpine AS backend-build
 WORKDIR /app/backend
 COPY backend/package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 COPY backend/ ./
-RUN npm run build
+RUN npx tsc
 
 FROM node:18-alpine AS frontend-build
 WORKDIR /app/frontend
