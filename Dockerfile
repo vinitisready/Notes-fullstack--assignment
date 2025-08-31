@@ -10,6 +10,7 @@ FROM node:18-alpine AS frontend-build
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
 COPY frontend/.npmrc ./
+# Install with legacy peer deps to handle React conflicts
 RUN npm install --legacy-peer-deps
 COPY frontend/ ./
 RUN npm run build
