@@ -9,7 +9,8 @@ RUN npm run build
 FROM node:18-alpine AS frontend-build
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
-RUN npm ci
+COPY frontend/.npmrc ./
+RUN npm install --legacy-peer-deps
 COPY frontend/ ./
 RUN npm run build
 
