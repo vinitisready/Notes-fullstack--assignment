@@ -29,7 +29,7 @@ body {
 
 .auth-right {
   flex: 1;
-  background: url('%PUBLIC_URL%/blue-wave-bg.jpg') center/cover no-repeat;
+  background: url('./blue-wave-bg.jpg') center/cover no-repeat;
   display: none;
 }
 
