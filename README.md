@@ -1,5 +1,7 @@
 # HD Notes - Full Stack Note Taking Application
 
+⚠️ **SECURITY**: Never commit .env files or secrets to git
+
 A modern, responsive note-taking application built with React TypeScript frontend and Node.js TypeScript backend.
 
 ## Features
